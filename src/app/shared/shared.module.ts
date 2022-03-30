@@ -1,4 +1,6 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+
 import { CommonModule } from '@angular/common';
 import { SidemenuComponent } from './sidemenu/sidemenu.component';
 
@@ -9,7 +11,8 @@ import { SidemenuComponent } from './sidemenu/sidemenu.component';
     SidemenuComponent
   ],
   imports: [
-    CommonModule
+    CommonModule, //incluye directivas como ngIf, ngFor....
+    RouterModule
   ],
   exports: [
     SidemenuComponent
