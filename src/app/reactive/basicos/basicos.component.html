@@ -4,7 +4,9 @@
 <div class="row">
     <!-- Campo de producto -->
     <div class="col">
-        <form autocomplete="off" [formGroup]="miFormulario">  
+        <form autocomplete="off" 
+              (ngSubmit)="guardar()"
+              [formGroup]="miFormulario">  
             <!-- campo producto -->
             <div class="mb-3 row">
                 <label for="inputPassword" class="col-sm-2 col-form-label">Producto</label>
@@ -13,7 +15,7 @@
                          class="form-control"   
                          formControlName="nombre"                     
                          placeholder="Nombre de producto">
-                  <span 
+                  <span *ngIf=" campoInvalido( 'nombre' ) "
                       class="form-text text-danger">
                       Debe ser de tres letras
                   </span>
@@ -29,7 +31,7 @@
                         class="form-control"   
                         formControlName="precio"                     
                         placeholder="Precio del producto">
-                    <span 
+                    <span *ngIf=" campoInvalido( 'precio' ) "
                         class="form-text text-danger">
                          El precio debe ser mayor a cero.
                     </span>
@@ -40,10 +42,16 @@
             <div class="mb-3 row">
                 <label for="inputPassword" class="col-sm-2 col-form-label">Existencias</label>
                 <div class="col-sm-10">
-                    <input type="number" 
+                    <input  
+                         type="number" 
                          formControlName="existencias" 
                          class="form-control"                                             
                          placeholder="Existencias del producto">
+                    <span *ngIf=" campoInvalido( 'existencias' ) "
+                         class="form-text text-danger">
+                          Las existencias deben ser 0 ó mayor
+                     </span>
+
                 </div>
             </div>
 
@@ -76,6 +84,9 @@
 
         <span>Value</span>
         <pre> {{ miFormulario.value | json }} </pre>
+
+        <span>Precio</span>
+        <pre> {{ miFormulario.controls['precio'].errors | json }} </pre>
 
 
     </div>
