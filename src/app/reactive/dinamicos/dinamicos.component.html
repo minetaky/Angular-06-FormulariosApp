@@ -28,11 +28,12 @@
 
             <div class="input-group mb-3">
                 <input class="form-control" 
-                    (keyup.enter)="enter()"
+                    [formControl]="nuevoFavorito"
+                    (keyup.enter)="agregarFavorito()"
                     placeholder="Agregar favorito">
 
                 <button class="btn btn-outline-primary" 
-                 (click)="enter()"
+                 (click)="agregarFavorito()"
                     type="button">
                     Agregar
                 </button>
@@ -44,18 +45,19 @@
     <!-- Lista de programas favoritos -->
     <div class="mb-3 row">
             <label class="col-sm-3 col-form-label">Favoritos</label>
-            <div class="col-sm-9">
+            <div class="col-sm-9" formArrayName="favoritos">
 
-                <!-- <div *ngFor="let juego of persona.favoritos; let i = index"
-                    class="input-group mb-1">
-                        <input class="form-control">
+                <div class="input-group mb-1"
+                    *ngFor="let favoritos of getFavoritosArr.controls; let i = index">
+                        <input class="form-control"
+                        [formControlName]="i">
 
                         <button class="btn btn-outline-danger" 
-                        type="button"
-                        (click)="enter()">
+                        (click)="borrar(i)"
+                        type="button">
                         Borrar
                     </button>
-                </div> -->
+                </div>
 
                 
  
@@ -77,7 +79,13 @@
 
 </form>
 
-<!-- <div>
-    <span>Persona</span>
-    <pre>{{ persona | json }}</pre>
-</div> -->
+<span>Valid</span>
+    <pre>{{ miFormulario.valid | json }}</pre>
+
+<span>Value</span>
+    <pre>{{ miFormulario.value | json }}</pre>
+<br>
+
+<span>Agregar dorama</span>
+    <pre>{{ nuevoFavorito.valid | json }}</pre>
+    <pre>{{ nuevoFavorito.value | json }}</pre>
