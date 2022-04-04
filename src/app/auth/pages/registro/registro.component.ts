@@ -41,6 +41,20 @@ export class RegistroComponent implements OnInit {
             this.miFormulario.get(campo)?.touched;
   }
 
+  get emailErrorMsg(): string{
+    const errors = this.miFormulario.get('email')?.errors;
+
+    if( errors?.['required'] ){
+      return 'El email es obligatorio.';
+    }else if( errors?.['pattern'] ){
+      return 'El email ingresado no es válido.';
+    }else if( errors?.['emailTomado'] ){
+      return 'El email ingresado ya fué tomado.';
+    }
+
+    return '';
+  }
+
   submitFormulario(){
     console.log( this.miFormulario.value );
 
